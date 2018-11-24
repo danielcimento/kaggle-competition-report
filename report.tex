@@ -33,35 +33,23 @@
 
 \section{Introduction}
 
-%%
-%% FILLER TEXT
-%% Remove and fill in the section's content
-%%
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tincidunt est. Aliquam tellus augue, imperdiet non magna rhoncus, tincidunt placerat mi. Aliquam eleifend nulla finibus tortor tincidunt, non maximus lectus dictum. Donec nec ultrices orci, ut elementum felis. Suspendisse id aliquam orci. Aenean auctor, velit eu venenatis feugiat, arcu diam molestie felis, nec faucibus mauris orci vel ante. Phasellus scelerisque laoreet risus quis sagittis.
+For this project, we were tasked with training a classifier to recognize hand drawn images on a modified subset of the Google ``Quick, Draw!'' dataset.
 
-Cras feugiat, mauris sed maximus porta, enim elit molestie nulla, a imperdiet dui urna vel nisl. Etiam eu nulla augue. Nullam dui eros, fermentum ut viverra quis, venenatis nec lacus. Nullam congue eget ex eu vehicula. In sed lectus ac turpis lacinia suscipit non non ante. Phasellus lacus erat, sollicitudin et purus eget, venenatis euismod ante. Nulla vitae dui massa. Maecenas augue tortor, pharetra vitae blandit a, ultrices quis nibh. Sed facilisis enim libero, vitae pharetra nulla ornare at. Nam tristique enim vel ante interdum dictum. Quisque volutpat volutpat leo, in accumsan dui malesuada vel. Maecenas pellentesque augue in convallis tristique. Mauris elementum vel metus quis mattis. Nunc tristique scelerisque ullamcorper.
+This dataset was altered with noise artifacts and various transformations to the images, so we needed to keep that constraint in mind when designing our solution.
 
-Quisque placerat est in enim maximus varius. Nunc nec lectus eu neque euismod viverra. Nullam non elementum purus, id pharetra sem. Vivamus vel vehicula tellus, eu pulvinar orci. Nunc scelerisque eget est sit amet luctus. Etiam et rhoncus odio, eu blandit eros. Phasellus gravida leo magna, quis ultricies risus viverra sit amet. Nunc finibus iaculis vehicula. Aenean nunc enim, sollicitudin at egestas ut, venenatis id ex. Proin at laoreet diam, ut viverra metus. Praesent a erat neque. Etiam volutpat lacinia dui interdum finibus. Praesent justo sem, scelerisque sit amet magna eu, maximus fermentum nibh.
+We tackled this project by applying a variety of image pre-processing methods and using three classifiers: an SVM with a linear kernel, a feed-forward neural network, and a convolutional neural network (CNN).
 
-Vivamus tempor pulvinar velit vitae venenatis. Etiam lectus massa, lacinia eu odio nec, iaculis congue tellus. Nam elit massa, malesuada quis diam ut, mollis rhoncus ex. Aliquam pellentesque lobortis lorem, interdum finibus elit ullamcorper vel. Nunc non hendrerit nibh, ut sagittis turpis. Donec dignissim lacus eu mi pretium tristique. Sed pharetra eu urna sed porttitor. Proin mollis turpis et nibh interdum ullamcorper. Nullam imperdiet fringilla lacus. Duis id nulla vitae lorem viverra hendrerit. Pellentesque id lorem eros. Duis semper blandit facilisis. Curabitur sed tempus enim.
-
-Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis dolor. Duis eu sollicitudin ligula, sed lobortis massa. Donec egestas convallis maximus. Mauris auctor egestas tellus nec vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In aliquet blandit elit a tempus. Donec urna augue, cursus quis leo a, porta blandit ligula. Quisque aliquet pellentesque nisl nec viverra. Maecenas dictum et lectus sed hendrerit. Nunc dapibus, nisl eu mattis hendrerit, eros lorem consectetur quam, ac accumsan erat risus vel metus. Quisque ipsum dui, bibendum sit amet suscipit non, pellentesque ac odio. Phasellus posuere, dui ut efficitur mattis, arcu arcu elementum ante, vel tristique mi mi sed nisl. Ut ut erat augue. Aliquam volutpat mollis vestibulum. 
+Of these, we saw the best performance with the CNN, and some aspects of image pre-processing helped produce the best results.
 
 \section{Feature Design}
 
-%%
-%% FILLER TEXT
-%% Remove and fill in the section's content
-%%
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tincidunt est. Aliquam tellus augue, imperdiet non magna rhoncus, tincidunt placerat mi. Aliquam eleifend nulla finibus tortor tincidunt, non maximus lectus dictum. Donec nec ultrices orci, ut elementum felis. Suspendisse id aliquam orci. Aenean auctor, velit eu venenatis feugiat, arcu diam molestie felis, nec faucibus mauris orci vel ante. Phasellus scelerisque laoreet risus quis sagittis.
+The biggest difficulties faced by our dataset were the noise and the number of features. The sizes of the images caused training to take a long time, and the noise interfered significantly with our linear model.
 
-Cras feugiat, mauris sed maximus porta, enim elit molestie nulla, a imperdiet dui urna vel nisl. Etiam eu nulla augue. Nullam dui eros, fermentum ut viverra quis, venenatis nec lacus. Nullam congue eget ex eu vehicula. In sed lectus ac turpis lacinia suscipit non non ante. Phasellus lacus erat, sollicitudin et purus eget, venenatis euismod ante. Nulla vitae dui massa. Maecenas augue tortor, pharetra vitae blandit a, ultrices quis nibh. Sed facilisis enim libero, vitae pharetra nulla ornare at. Nam tristique enim vel ante interdum dictum. Quisque volutpat volutpat leo, in accumsan dui malesuada vel. Maecenas pellentesque augue in convallis tristique. Mauris elementum vel metus quis mattis. Nunc tristique scelerisque ullamcorper.
+Our first attempt at pre-processing involved using smoothing and erosion based filters to reduce the impact of the noise and sharpen the main shape of the image under test. In doing this, we hoped our models would be more easily able to identify the feature which was relevant to the label.
 
-Quisque placerat est in enim maximus varius. Nunc nec lectus eu neque euismod viverra. Nullam non elementum purus, id pharetra sem. Vivamus vel vehicula tellus, eu pulvinar orci. Nunc scelerisque eget est sit amet luctus. Etiam et rhoncus odio, eu blandit eros. Phasellus gravida leo magna, quis ultricies risus viverra sit amet. Nunc finibus iaculis vehicula. Aenean nunc enim, sollicitudin at egestas ut, venenatis id ex. Proin at laoreet diam, ut viverra metus. Praesent a erat neque. Etiam volutpat lacinia dui interdum finibus. Praesent justo sem, scelerisque sit amet magna eu, maximus fermentum nibh.
+Our next approach was cropping the image based on pixel density, with the hope that the actual image would stand out from the noise. By cropping the image, we would drastically reduce the number of features to speed up training and improve performance by removing excessive noise interference.
 
-Vivamus tempor pulvinar velit vitae venenatis. Etiam lectus massa, lacinia eu odio nec, iaculis congue tellus. Nam elit massa, malesuada quis diam ut, mollis rhoncus ex. Aliquam pellentesque lobortis lorem, interdum finibus elit ullamcorper vel. Nunc non hendrerit nibh, ut sagittis turpis. Donec dignissim lacus eu mi pretium tristique. Sed pharetra eu urna sed porttitor. Proin mollis turpis et nibh interdum ullamcorper. Nullam imperdiet fringilla lacus. Duis id nulla vitae lorem viverra hendrerit. Pellentesque id lorem eros. Duis semper blandit facilisis. Curabitur sed tempus enim.
-
-Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis dolor. Duis eu sollicitudin ligula, sed lobortis massa. Donec egestas convallis maximus. Mauris auctor egestas tellus nec vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In aliquet blandit elit a tempus. Donec urna augue, cursus quis leo a, porta blandit ligula. Quisque aliquet pellentesque nisl nec viverra. Maecenas dictum et lectus sed hendrerit. Nunc dapibus, nisl eu mattis hendrerit, eros lorem consectetur quam, ac accumsan erat risus vel metus. Quisque ipsum dui, bibendum sit amet suscipit non, pellentesque ac odio. Phasellus posuere, dui ut efficitur mattis, arcu arcu elementum ante, vel tristique mi mi sed nisl. Ut ut erat augue. Aliquam volutpat mollis vestibulum. 
+This unfortunately did not perfectly crop the images in question, and it took a very long time to pre-process the images, so we revisited this approach by using a contour-based approach, isolating the largest contiguous region of pixels and cropping around it. This was much faster than the density approach, and it provided significantly cleaner results. In addition, since the crop size was based on the input data, we were confident that our resultant size would be as minimal as feasibly possible.
 
 \section{Algorithms}
 
