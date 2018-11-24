@@ -62,23 +62,23 @@ We thought SVMs would be a better baseline model than alternatives like Decision
 
 \section{Methodology}
 
-In implementing the SVM, we used Grid Search for cross-validation and hyperparameter tuning, testing values of the hyperparameters $C$ and $tol$ over a wide range (i.e. \{$10e-5, 10e-4, \ldots 10e5$\}).\\
+In implementing the SVM, we used Grid Search for cross-validation and hyperparameter tuning, testing values of the hyperparameters $C$ and $tol$ over a wide range (i.e. \{$10e-5, 10e-4, \ldots 10e5$\}).
+
+%% TODO!!!
 
 \section{Results}
 
-%%
-%% FILLER TEXT
-%% Remove and fill in the section's content
-%%
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tincidunt est. Aliquam tellus augue, imperdiet non magna rhoncus, tincidunt placerat mi. Aliquam eleifend nulla finibus tortor tincidunt, non maximus lectus dictum. Donec nec ultrices orci, ut elementum felis. Suspendisse id aliquam orci. Aenean auctor, velit eu venenatis feugiat, arcu diam molestie felis, nec faucibus mauris orci vel ante. Phasellus scelerisque laoreet risus quis sagittis.
+For our SVM, we achieved predictably poor performance, with an accuracy of 4.366\%. Given that a hypothetical random classifier would be expected to have an accuracy of 3.22\%, this was an improvement, but not one significant enough to warrant much further exploration. From hyperparameter tuning, we didn't see any performance increase, and at more extreme hyperparameter values, we often failed to converge on our training set.
 
-Cras feugiat, mauris sed maximus porta, enim elit molestie nulla, a imperdiet dui urna vel nisl. Etiam eu nulla augue. Nullam dui eros, fermentum ut viverra quis, venenatis nec lacus. Nullam congue eget ex eu vehicula. In sed lectus ac turpis lacinia suscipit non non ante. Phasellus lacus erat, sollicitudin et purus eget, venenatis euismod ante. Nulla vitae dui massa. Maecenas augue tortor, pharetra vitae blandit a, ultrices quis nibh. Sed facilisis enim libero, vitae pharetra nulla ornare at. Nam tristique enim vel ante interdum dictum. Quisque volutpat volutpat leo, in accumsan dui malesuada vel. Maecenas pellentesque augue in convallis tristique. Mauris elementum vel metus quis mattis. Nunc tristique scelerisque ullamcorper.
+Erosion and smoothing based image pre-processing didn't show any improvement to the overall results, but cropping the images with the contour-based approach gave accuracies of 5.66\%, which was a relatively significant jump compared to our previous score.
 
-Quisque placerat est in enim maximus varius. Nunc nec lectus eu neque euismod viverra. Nullam non elementum purus, id pharetra sem. Vivamus vel vehicula tellus, eu pulvinar orci. Nunc scelerisque eget est sit amet luctus. Etiam et rhoncus odio, eu blandit eros. Phasellus gravida leo magna, quis ultricies risus viverra sit amet. Nunc finibus iaculis vehicula. Aenean nunc enim, sollicitudin at egestas ut, venenatis id ex. Proin at laoreet diam, ut viverra metus. Praesent a erat neque. Etiam volutpat lacinia dui interdum finibus. Praesent justo sem, scelerisque sit amet magna eu, maximus fermentum nibh.
+%% TODO!!!
+(Include results of neural network)
 
-Vivamus tempor pulvinar velit vitae venenatis. Etiam lectus massa, lacinia eu odio nec, iaculis congue tellus. Nam elit massa, malesuada quis diam ut, mollis rhoncus ex. Aliquam pellentesque lobortis lorem, interdum finibus elit ullamcorper vel. Nunc non hendrerit nibh, ut sagittis turpis. Donec dignissim lacus eu mi pretium tristique. Sed pharetra eu urna sed porttitor. Proin mollis turpis et nibh interdum ullamcorper. Nullam imperdiet fringilla lacus. Duis id nulla vitae lorem viverra hendrerit. Pellentesque id lorem eros. Duis semper blandit facilisis. Curabitur sed tempus enim.
+Ultimately, our Convolutional Neural Network gave us the best performance recorded, with an accuracy of 69.966\%. However, when we applied smoothing and cropping algorithms to our input data, we found that our performance stayed the same, and in some cases decreased. So as a whole, we achieved our best results with unprocessed input data.
 
-Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis dolor. Duis eu sollicitudin ligula, sed lobortis massa. Donec egestas convallis maximus. Mauris auctor egestas tellus nec vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In aliquet blandit elit a tempus. Donec urna augue, cursus quis leo a, porta blandit ligula. Quisque aliquet pellentesque nisl nec viverra. Maecenas dictum et lectus sed hendrerit. Nunc dapibus, nisl eu mattis hendrerit, eros lorem consectetur quam, ac accumsan erat risus vel metus. Quisque ipsum dui, bibendum sit amet suscipit non, pellentesque ac odio. Phasellus posuere, dui ut efficitur mattis, arcu arcu elementum ante, vel tristique mi mi sed nisl. Ut ut erat augue. Aliquam volutpat mollis vestibulum. 
+%% TODO!!!
+(Include any extra information, including a comparison between the three models)
 
 \section{Discussion}
 
@@ -98,18 +98,12 @@ Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis
 
 \section{Statement of Contributions}
 
-%%
-%% FILLER TEXT
-%% Remove and fill in the section's content
-%%
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tincidunt est. Aliquam tellus augue, imperdiet non magna rhoncus, tincidunt placerat mi. Aliquam eleifend nulla finibus tortor tincidunt, non maximus lectus dictum. Donec nec ultrices orci, ut elementum felis. Suspendisse id aliquam orci. Aenean auctor, velit eu venenatis feugiat, arcu diam molestie felis, nec faucibus mauris orci vel ante. Phasellus scelerisque laoreet risus quis sagittis.
+Charles made the most significant contributions to the methodology and implementation our pre-processing methods, handling the smoothing, erosion, and contour based approaches. He also contributed to the data analysis stemming from the pre-processing changes.
 
-Cras feugiat, mauris sed maximus porta, enim elit molestie nulla, a imperdiet dui urna vel nisl. Etiam eu nulla augue. Nullam dui eros, fermentum ut viverra quis, venenatis nec lacus. Nullam congue eget ex eu vehicula. In sed lectus ac turpis lacinia suscipit non non ante. Phasellus lacus erat, sollicitudin et purus eget, venenatis euismod ante. Nulla vitae dui massa. Maecenas augue tortor, pharetra vitae blandit a, ultrices quis nibh. Sed facilisis enim libero, vitae pharetra nulla ornare at. Nam tristique enim vel ante interdum dictum. Quisque volutpat volutpat leo, in accumsan dui malesuada vel. Maecenas pellentesque augue in convallis tristique. Mauris elementum vel metus quis mattis. Nunc tristique scelerisque ullamcorper.
+Daniel handled the linear SVM baseline, including hyperparameter tuning and the resulting data analysis. He also contributed to the methodology of the pre-processing methods and contributed to writing the report.
 
-Quisque placerat est in enim maximus varius. Nunc nec lectus eu neque euismod viverra. Nullam non elementum purus, id pharetra sem. Vivamus vel vehicula tellus, eu pulvinar orci. Nunc scelerisque eget est sit amet luctus. Etiam et rhoncus odio, eu blandit eros. Phasellus gravida leo magna, quis ultricies risus viverra sit amet. Nunc finibus iaculis vehicula. Aenean nunc enim, sollicitudin at egestas ut, venenatis id ex. Proin at laoreet diam, ut viverra metus. Praesent a erat neque. Etiam volutpat lacinia dui interdum finibus. Praesent justo sem, scelerisque sit amet magna eu, maximus fermentum nibh.
+Ziwen took the initiative on the Neural Network and Convolutional Neural Network, handling the methodology, implementation, and data analysis.
 
-Vivamus tempor pulvinar velit vitae venenatis. Etiam lectus massa, lacinia eu odio nec, iaculis congue tellus. Nam elit massa, malesuada quis diam ut, mollis rhoncus ex. Aliquam pellentesque lobortis lorem, interdum finibus elit ullamcorper vel. Nunc non hendrerit nibh, ut sagittis turpis. Donec dignissim lacus eu mi pretium tristique. Sed pharetra eu urna sed porttitor. Proin mollis turpis et nibh interdum ullamcorper. Nullam imperdiet fringilla lacus. Duis id nulla vitae lorem viverra hendrerit. Pellentesque id lorem eros. Duis semper blandit facilisis. Curabitur sed tempus enim.
-
-Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis dolor. Duis eu sollicitudin ligula, sed lobortis massa. Donec egestas convallis maximus. Mauris auctor egestas tellus nec vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In aliquet blandit elit a tempus. Donec urna augue, cursus quis leo a, porta blandit ligula. Quisque aliquet pellentesque nisl nec viverra. Maecenas dictum et lectus sed hendrerit. Nunc dapibus, nisl eu mattis hendrerit, eros lorem consectetur quam, ac accumsan erat risus vel metus. Quisque ipsum dui, bibendum sit amet suscipit non, pellentesque ac odio. Phasellus posuere, dui ut efficitur mattis, arcu arcu elementum ante, vel tristique mi mi sed nisl. Ut ut erat augue. Aliquam volutpat mollis vestibulum. 
+We hereby state that all the work presented in this report is that of the authors. 
 
 \end{document}
