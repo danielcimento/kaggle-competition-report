@@ -33,11 +33,11 @@
 
 \section{Introduction}
 
-For this project, we were tasked with training a classifier to recognize hand drawn images on a modified subset of the Google ``Quick, Draw!'' dataset.
+For this project, we were tasked with training classifiers to recognize hand drawn images on a modified subset of the Google ``Quick, Draw!'' dataset.
 
-This dataset was altered with noise artifacts and various transformations to the images, so we needed to keep that constraint in mind when designing our solution.
+This dataset was altered with noise artifacts and various transformations to the images, so we needed to keep those modifications in mind when designing our solution.
 
-We tackled this project by applying a variety of image pre-processing methods and using three classifiers: an SVM with a linear kernel, a feed-forward neural network, and a convolutional neural network (CNN).
+We tackled this project by trying a variety of image pre-processing methods and using three classifiers: an SVM with a linear kernel, a feed-forward neural network, and a convolutional neural network (CNN).
 
 Of these, we saw the best performance with the CNN, and some aspects of image pre-processing helped produce the best results.
 
@@ -45,7 +45,7 @@ Of these, we saw the best performance with the CNN, and some aspects of image pr
 
 The biggest difficulties faced by our dataset were the noise and the number of features. The sizes of the images caused training to take a long time, and the noise interfered significantly with our linear model.
 
-Our first attempt at pre-processing involved using smoothing and erosion based filters to reduce the impact of the noise and sharpen the main shape of the image under test. In doing this, we hoped our models would be more easily able to identify the feature which was relevant to the label.
+Our first attempt at pre-processing involved using smoothing and erosion based filters to reduce the impact of the noise and sharpen the main shape of the image under test. In doing this, we hoped our models would be more easily able to identify the features that were relevant to the label.
 
 Our next approach was cropping the image based on pixel density, with the hope that the actual image would stand out from the noise. By cropping the image, we would drastically reduce the number of features to speed up training and improve performance by removing excessive noise interference.
 
@@ -53,30 +53,49 @@ This unfortunately did not perfectly crop the images in question, and it took a 
 
 \section{Algorithms}
 
+\subsection{Linear SVM}
+
 Our ``baseline'' algorithm was an SVM with a linear kernel. Given the number of features and the interference with noise, we anticipated that the performance would be suboptimal, since finding key support vectors would be challenging.
 
-We thought SVMs would be a better baseline model than alternatives like Decision Trees and Naive Bayes, as ultimately those two models have independence assumptions that are too strong, given the impact contiguity of pixels has on overall structure. Since Naive Bayes is a probabilistic approach, it may have had an advantage in handling the random noise, but ultimately we felt that the independence assumption outweighed that benefit, and we might see similar improvements just from image preprocessing. Furthermore, SVMs were much faster to train than Decision Trees, since the dimensionality of our input was very large.
+We thought SVMs would be a better baseline model than alternatives like Decision Trees and Naive Bayes, as ultimately Decision Trees were too slow to train reliably on such a high dimensionality, and Naive Bayes has independence assumptions that are too strong, given the impact contiguity of pixels has on overall structure. Since Naive Bayes is a probabilistic approach, it may have had an advantage in handling the random noise, but ultimately we felt that the independence assumption outweighed that benefit, and we hoped to see similar improvements just from image preprocessing.
 
+\subsection{Neural Network}
 %% TODO!!!
-(Add sections for Neural Network and CNN).
+
+\subsection{Convolutional Neural Network}
+%% TODO!!!
 
 \section{Methodology}
 
+\subsection{Linear SVM}
+
 In implementing the SVM, we used Grid Search for cross-validation and hyperparameter tuning, testing values of the hyperparameters $C$ and $tol$ over a wide range (i.e. \{$10e-5, 10e-4, \ldots 10e5$\}).
+
+\subsection{Neural Network}
+
+%% TODO!!
+
+\subsection{Convolutional Neural Network}
 
 %% TODO!!!
 
 \section{Results}
 
+\subsection{Linear SVM}
+
 For our SVM, we achieved predictably poor performance, with an accuracy of 4.366\%. Given that a hypothetical random classifier would be expected to have an accuracy of 3.22\%, this was an improvement, but not one significant enough to warrant much further exploration. From hyperparameter tuning, we didn't see any performance increase, and at more extreme hyperparameter values, we often failed to converge on our training set.
 
 Erosion and smoothing based image pre-processing didn't show any improvement to the overall results, but cropping the images with the contour-based approach gave accuracies of 5.66\%, which was a relatively significant jump compared to our previous score.
 
+\subsection{Neural Network}
 %% TODO!!!
 (Include results of neural network)
 
+\subsection{Convolutional Neural Network}
+
 Ultimately, our Convolutional Neural Network gave us the best performance recorded, with an accuracy of 69.966\%. However, when we applied smoothing and cropping algorithms to our input data, we found that our performance stayed the same, and in some cases decreased. So as a whole, we achieved our best results with unprocessed input data.
 
+\subsection{Comparison}
 %% TODO!!!
 (Include any extra information, including a comparison between the three models)
 
