@@ -31,7 +31,7 @@
 
 \maketitle
 
-\section{Introduction}
+\section{\textbf{Introduction}}
 
 For this project, we were tasked with training classifiers to recognize hand drawn images on a modified subset of the Google ``Quick, Draw!'' dataset.
 
@@ -41,7 +41,7 @@ We tackled this project by trying a variety of image pre-processing methods and 
 
 Of these, we saw the best performance with the CNN, and some aspects of image pre-processing helped produce the best results.
 
-\section{Feature Design}
+\section{\textbf{Feature Design}}
 
 The biggest difficulties faced by our dataset were the noise and the number of features. The sizes of the images caused training to take a long time, and the noise interfered significantly with our linear model.
 
@@ -51,7 +51,7 @@ Our next approach was cropping the image based on pixel density, with the hope t
 
 This unfortunately did not perfectly crop the images in question, and it took a very long time to pre-process the images, so we revisited this approach by using a contour-based approach, isolating the largest contiguous region of pixels and cropping around it. This was much faster than the density approach, and it provided significantly cleaner results. In addition, since the crop size was based on the input data, we were confident that our resultant size would be as minimal as feasibly possible.
 
-\section{Algorithms}
+\section{\textbf{Algorithms}}
 
 \subsection{Linear SVM}
 
@@ -84,7 +84,7 @@ Lastly, the CNN uses parameter sharing and pooling. Parameter sharing allows us 
 
 The hyper-parameters in this model include the batch size of each iteration, an optimizer, the learning rate of the optimizer, and the number of epochs. How we tuned these parameters will be discussed in the methodology section.
 
-\section{Methodology}
+\section{\textbf{Methodology}}
 
 \subsection{Linear SVM}
 
@@ -98,7 +98,7 @@ In implementing the SVM, we used Grid Search for cross-validation and hyperparam
 
 %% TODO!!!
 
-\section{Results}
+\section{\textbf{Results}}
 
 \subsection{Linear SVM}
 
@@ -118,7 +118,7 @@ Ultimately, our Convolutional Neural Network gave us the best performance record
 %% TODO!!!
 (Include any extra information, including a comparison between the three models)
 
-\section{Discussion}
+\section{\textbf{Discussion}}
 
 %%
 %% FILLER TEXT
@@ -134,7 +134,7 @@ Vivamus tempor pulvinar velit vitae venenatis. Etiam lectus massa, lacinia eu od
 
 Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis dolor. Duis eu sollicitudin ligula, sed lobortis massa. Donec egestas convallis maximus. Mauris auctor egestas tellus nec vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In aliquet blandit elit a tempus. Donec urna augue, cursus quis leo a, porta blandit ligula. Quisque aliquet pellentesque nisl nec viverra. Maecenas dictum et lectus sed hendrerit. Nunc dapibus, nisl eu mattis hendrerit, eros lorem consectetur quam, ac accumsan erat risus vel metus. Quisque ipsum dui, bibendum sit amet suscipit non, pellentesque ac odio. Phasellus posuere, dui ut efficitur mattis, arcu arcu elementum ante, vel tristique mi mi sed nisl. Ut ut erat augue. Aliquam volutpat mollis vestibulum. 
 
-\section{Statement of Contributions}
+\section{\textbf{Statement of Contributions}}
 
 Charles made the most significant contributions to the methodology and implementation our pre-processing methods, handling the smoothing, erosion, and contour based approaches. He also contributed to the data analysis stemming from the pre-processing changes.
 
