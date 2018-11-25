@@ -57,13 +57,32 @@ This unfortunately did not perfectly crop the images in question, and it took a 
 
 Our ``baseline'' algorithm was an SVM with a linear kernel. Given the number of features and the interference with noise, we anticipated that the performance would be suboptimal, since finding key support vectors would be challenging.
 
-We thought SVMs would be a better baseline model than alternatives like Decision Trees and Naive Bayes, as ultimately Decision Trees were too slow to train reliably on such a high dimensionality, and Naive Bayes has independence assumptions that are too strong, given the impact contiguity of pixels has on overall structure. Since Naive Bayes is a probabilistic approach, it may have had an advantage in handling the random noise, but ultimately we felt that the independence assumption outweighed that benefit, and we hoped to see similar improvements just from image preprocessing.
+We thought SVMs would be a better baseline model than alternatives like Decision Trees and Naive Bayes, as ultimately Decision Trees were too slow to train reliably on such a high dimensionality, and Naive Bayes has independence assumptions that are too strong, given the impact contiguity of pixels has on overall structure. 
+
+Since Naive Bayes is a probabilistic approach, it may have had an advantage in handling the random noise, but ultimately we felt that the independence assumption outweighed that benefit, and we hoped to see similar improvements just from image preprocessing.
 
 \subsection{Neural Network}
-%% TODO!!!
+
+The neural network is considered a universal function approximator, which means that with enough nodes, a two-layer neural network can approximate any function to within a certain error bound. The function we are trying to emulate is one which, after training on the data, can output class labels for images depending on whether or not a given drawing appears in the image.
+
+We firstly defined the feed forward neural network by creating multi-layered networks using the sigmoid function as our activation function. The network contains one input layer, one output layer, and a variable number of hidden layers. 
+
+The structure of the network starts with the input layer, which contains values based directly on the input data. The input of the hidden layer nearest to the input layer will be the values of the input layer multiplied by weights established between the two layers. The weighted sum of the input layer will go through the activation function and become the output of the first hidden layer. By continuing this “forward-feeding” process, we can continue chaining layers together in this fashion until ultimately predicting a final output in output layer. This output will determine the label our network assigns to a data sample.
+
+The training process of this is done through back-propagation: we calculate the partial derivative $\frac{\partial C}{\partial w}$ of the cost function $C$ with respect to any weight $w$ (which might be a bias, $b$) in the network and use that to update the weight for future iterations of training, until a satisfactory accuracy is reached or until our model stops improving. 
 
 \subsection{Convolutional Neural Network}
-%% TODO!!!
+
+A disadvantage of regular neural network is that it does not take into account the structure of the input data. As a result, the performance when classifying categories of data like images is poor. 
+A better neural network method called Convolutional Neural Network has much better performance when classifying the image data. There are several reasons for this:
+
+First, CNN takes a 3D tensor as input and its layer can transform an input 3D volume to output 3D with some differentiable function that may or may not have parameters. 
+
+Second, the CNN uses local receptive fields, which allow neurons to only concern themselves with a small region of interest in the image. 
+
+Lastly, the CNN uses parameter sharing and pooling. Parameter sharing allows us to treat certain local features the same, independent of where they are found in the image. Pooling allows us to place more emphasis on whether or not a feature occurs in an image, rather than the region where the feature occurs.
+
+The hyper-parameters in this model include the batch size of each iteration, an optimizer, the learning rate of the optimizer, and the number of epochs. How we tuned these parameters will be discussed in the methodology section.
 
 \section{Methodology}
 
