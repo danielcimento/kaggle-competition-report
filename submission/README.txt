@@ -1,16 +1,34 @@
-train_images.npy: it should contains the training images
-train_label.csv: it should contains the label of the training images
-test_images.npy: it should contains the images data which you want to make predicition of the class
+For our final submission:
+
+Before running the submission.ipynb jupyter Notebook, ensure the directory in which the .ipynb file is located has an "all/" folder which should contain 4 files: 
+- model_1.h5
+- train_images.npy 
+- train_labels.csv
+
+Then, move the private test data file to the "all/" folder with the name "test_images.py" (you may need to overwrite the file that is already there)
+The code will load the previously trained model and run on the private test data, outputting the results in submission.csv
+
+= = = = =
+
+If you would like to run our other code for reference:
 
 LinearSVM:
-Before running the baseline.ipynb jupyter Notebook, make sure the .ipynb file are locate in the direactory which 
-contains 3 files: scaled_train_images.npy, scaled_test_images.npy and train_labels.csv
-The code will take 2 pre-processed data and train_label.csv to generate result.
+Before running the baseline.ipynb jupyter Notebook, make sure the directory in which the .ipynb file is located contains 3 files: 
+- scaled_train_images.npy
+- scaled_test_images.npy
+- train_labels.csv
+Then, run the notebook, and the results will be output into submission.csv
 
-Feedforward Neural Network trained by back propagation:
-Before running the neural_network.ipynb jupyter Notebook, make sure the .ipynb file are locate in the direactory which 
-contains 3 files: scaled_train_images.npy, scaled_test_images.npy and train_labels.csv
-The code will take 2 pre-processed data and train_label.csv to generate result.
+-----
+
+Feed-forward Neural Network:
+Before running the neural_network.ipynb jupyter Notebook, make sure the directory in which the .ipynb file is located contains 3 files: 
+- scaled_train_images.npy
+- scaled_test_images.npy
+- train_labels.csv
+Then, run the notebook, and the results will be output into submission.csv
+
+-----
 
 Convolutional Neural Network: (This is the one we use for leaderboard competition)
 Before running the CNN.ipynb jupyter Notebook, make sure the .ipynb file are locate in the direactory which has an "all" folder. 
@@ -21,7 +39,19 @@ track of training process. In addition, the code will generate two files named m
 are saved into these two files. Finally, the code will generate a submission.csv which contains the class predicition 
 of the test_images.npy
 
-Before running the submission.ipynb jupyter Notebook, make sure the .ipynb file are locate in the direactory which has an "all" folder. 
-In the all folder, it should contains 4 files: train_images.npy, test_images.npy, model_1.h5 and train_labels.csv
-This code is created for generating submission.csv when we already have the model saved as model_1.h5. So this code will load this 
-model and compute the prediction by using this model. It will be more time efficient if we already have previously trained model saved. 
+-----
+
+Explanation of files:
+
+train_images.npy: contains the raw images used to test the model
+train_label.csv: contains the corresponding labels for those images
+
+test_images.npy: contains the raw images for which you would like to generate predictions
+
+scaled_train_images.npy: contains the images used to train the model, but cropped.
+scaled_test_images.npy: contains the images used to test the model, but cropped.
+
+
+
+
+
