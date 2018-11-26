@@ -1,11 +1,13 @@
 For our final submission:
 
-Before running the submission.ipynb jupyter Notebook, ensure the directory in which the .ipynb file is located has an "all/" folder which should contain 4 files: 
-- model_1.h5
-- train_images.npy 
-- train_labels.csv
+Before running the submission.ipynb jupyter Notebook, ensure that there is a directory "all/" in the same root directory.
+It should contain the file "model_1.h5"
 
-Then, move the private test data file to the "all/" folder with the name "test_images.py" (you may need to overwrite the file that is already there)
+Then, add the following files to the folder:
+- train_images.npy (the public training data set) 
+- train_labels.csv (the public training data set labels)
+- test_images.npy (the private data set [NOT the public test data set!!])
+
 The code will load the previously trained model and run on the private test data, outputting the results in submission.csv
 
 = = = = =
