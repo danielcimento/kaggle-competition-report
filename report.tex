@@ -17,8 +17,8 @@
 
 \author{
 \IEEEauthorblockN{Charles Alexandre Bedard}
-\IEEEauthorblockA{\{email\}}
-\IEEEauthorblockA{\{student id\}}
+\IEEEauthorblockA{\{charles-alexand.bedard@mail.mcgill.ca\}}
+\IEEEauthorblockA{\{260690698\}}
 \and
 \IEEEauthorblockN{Daniel Cimento}
 \IEEEauthorblockA{daniel.cimento@mail.mcgill.ca}
@@ -45,12 +45,17 @@ Of these, we saw the best performance with the CNN, and some aspects of image pr
 
 The biggest difficulties faced by our dataset were the noise and the number of features. The sizes of the images caused training to take a long time, and the noise interfered significantly with our linear model.
 
-Our first attempt at pre-processing involved using smoothing and erosion based filters to reduce the impact of the noise and sharpen the main shape of the image under test. In doing this, we hoped our models would be more easily able to identify the features that were relevant to the label.
+Our first attempt at pre-processing involved using smoothing and erosion based filters to reduce the impact of the noise and sharpen the main shape of the image under test. In doing this, we hoped our models would be more easily able to identify the features that were relevant to the label. The major drawback from those types of filters is that it smooths everything in the image, including the drawing. It did get rid of the less concentrated clusters of noise, but in most cases it only attenuated the noise.
 
 Our next approach was cropping the image based on pixel density, with the hope that the actual image would stand out from the noise. By cropping the image, we would drastically reduce the number of features to speed up training and improve performance by removing excessive noise interference.
 
-This unfortunately did not perfectly crop the images in question, and it took a very long time to pre-process the images, so we revisited this approach by using a contour-based approach, isolating the largest contiguous region of pixels and cropping around it. This was much faster than the density approach, and it provided significantly cleaner results. In addition, since the crop size was based on the input data, we were confident that our resultant size would be as minimal as feasibly possible.
+This unfortunately did not perfectly crop the images in question due to the fact that some noise clusters have a very high pixel density, and it took a very long time to pre-process the images, so we revisited this approach by using a contour-based cropping.
 
+By going through all the contiguous regions of pixels and selecting the biggest region, the cropping algorithm became much more reliable. This was much faster than the density approach, and it provided significantly cleaner results. Since, some drawings are composed of multiple disjoint parts however, we had to slightly blur the images in order for the contour to include all of the drawing. The drawback from blurring the image before computing the contours is that some noise could be considered part of the drawing, but it was necessary to make sure we did not crop parts of a drawing.
+
+One other significant improvement from using the cropped images, besides from the fact that the noise is almost completely removed, is that the size of the data is reduced considerably. 
+
+The significantly smaller size of the cropped images lead to much better results and faster computing time with the Linear SVM and the Neural Network, but had little to no effect on the results with the Convolutional Neural Network.
 \section{\textbf{Algorithms}}
 
 \subsection{Linear SVM}
