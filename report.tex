@@ -57,7 +57,7 @@ This unfortunately did not perfectly crop the images in question, and it took a 
 
 Our ``baseline'' algorithm was an SVM with a linear kernel. Given the number of features and the interference with noise, we anticipated that the performance would be suboptimal, since finding key support vectors would be challenging.
 
-We thought SVMs would be a better baseline model than alternatives like Decision Trees and Naive Bayes, as ultimately Decision Trees were too slow to train reliably on such a high dimensionality, and Naive Bayes has independence assumptions that are too strong, given the impact contiguity of pixels has on overall structure. 
+We thought SVMs would be a better baseline model than alternatives like Decision Trees and Naive Bayes, as ultimately Decision Trees were too slow to train reliably on such a high dimensionality, and Naive Bayes has independence assumptions that are too strong, given the impact that pixel contiguity has on the image's overall structure. 
 
 Since Naive Bayes is a probabilistic approach, it may have had an advantage in handling the random noise, but ultimately we felt that the independence assumption outweighed that benefit, and we hoped to see similar improvements just from image preprocessing.
 
@@ -75,8 +75,8 @@ This gradient descent requires us not only to consider the influence of the last
 
 \subsection{Convolutional Neural Network}
 
-A disadvantage of regular neural network is that it does not take into account the structure of the input data. As a result, the performance when classifying categories of data like images is poor. 
-A better neural network method called Convolutional Neural Network has much better performance when classifying the image data. There are several reasons for this:
+A disadvantage of a regular neural network is that it does not take into account the structure of the input data. As a result, the performance when classifying categories of data like images is poor. 
+A better neural network method, using Convolutional Neural Networks, has much better performance when classifying the image data. There are several reasons for this:
 
 First, CNN takes a 3D tensor as input and its layer can transform an input 3D volume to output 3D with some differentiable function that may or may not have parameters. 
 
@@ -98,7 +98,7 @@ The neural networks are the most flexibile in terms of our training methods. Our
 
 To reach the best results, we experimented with adding more layers to the network, increasing the number of neurons in the given layers, tweaking the batch sizes, and altering the total number of epochs that we ran.
 
-We also used the same image pre-processing described above.
+We also used the same image pre-processing discussed in the feature selection section.
 
 \subsection{Convolutional Neural Network}
 
@@ -110,13 +110,13 @@ We also used the same image pre-processing described above.
 
 For our SVM, we achieved predictably poor performance, with an accuracy of 4.366\%. Given that a hypothetical random classifier would be expected to have an accuracy of 3.22\%, this was an improvement, but not one significant enough to warrant much further exploration. From hyperparameter tuning, we didn't see any performance increase, and at more extreme hyperparameter values, we often failed to converge on our training set.
 
-Erosion and smoothing based image pre-processing didn't show any improvement to the overall results, but cropping the images with the contour-based approach gave accuracies of 5.66\%, which was a relatively significant jump compared to our previous score.
+Erosion and smoothing based image pre-processing didn't show any improvement to the overall results, but cropping the images with the contour-based approach gave accuracies of 5.66\%, which is a relatively significant jump compared to our previous score.
 
 \subsection{Neural Network}
 
 Our neural network ultimately performed relatively poorly, at no point performing better than 20\% accuracy.
 
-Adding layers and neurons marked a faster growth during the first few epochs, but ultimately over time it didn't provide any better performance, so we ultimately kept our layers small and sparse.
+Adding layers and neurons marked a faster growth during the first few epochs, but ultimately over time it didn't provide any better performance, so we decided to keep our layers small and sparse.
 
 Batch sizes and epochs didn't improve the results much either, since the improvement to the model had already begun to taper off with a shorter number of epochs.
 
@@ -124,7 +124,9 @@ Image pre-processing helped the speed of training the model by a significant deg
 
 \subsection{Convolutional Neural Network}
 
-Ultimately, our Convolutional Neural Network gave us the best performance recorded, with an accuracy of 69.966\%. However, when we applied smoothing and cropping algorithms to our input data, we found that our performance stayed the same, and in some cases decreased. So as a whole, we achieved our best results with unprocessed input data.
+Ultimately, our Convolutional Neural Network gave us the best performance recorded, with an initial accuracy of 69.966\%. After investing more resources into hyperparameter tuning and training time, we were able to reach scores as high as 81.33\%.
+
+However, when we applied smoothing and cropping algorithms to our input data, we found that our performance stayed the same, and in some cases decreased. So as a whole, we achieved our best results with unprocessed input data.
 
 \subsection{Comparison}
 
@@ -136,7 +138,7 @@ Neural Networks performed better, but not by much, and the Convolutional Neural 
 
 We didn't have high expectations for our linear SVM, so our results weren't too surprising in that regard. However, we were a bit underwhelmed with the performance of the feed-forward neural network. The biggest con for our methodology with the feed-forward neural network is that our model was a fully-connected network, which likely allowed the noise to interfere with the model's training.
 
-Through local receptive fields, the neurons in the CNN were able to focus specifically on various regions of the image, allowing it to distinguish the signal from the noise. There may have been a slight bias in our approach, since we put the most resources for training into the CNN, since we had anticipated it having the best results, but it doesn't seem as though the feed-forward neural network would have provided better results with more resources.
+Through local receptive fields, the neurons in the CNN were able to focus specifically on various regions of the image, allowing it to distinguish the signal from the noise. There may have been a slight bias in our approach, since we put the most resources for training into the CNN, given our anticipation that it would have the best results, but it doesn't seem as though the feed-forward neural network would have provided better results with more resources.
 
 If we were to invest more in the feed-forward neural network, it would probably be the most helpful to invest more into image pre-processing, since we still ended up with quite a bit of noise in our final product.
 
@@ -144,9 +146,9 @@ If we were to invest more in the feed-forward neural network, it would probably 
 
 Charles made the most significant contributions to the methodology and implementation our pre-processing methods, handling the smoothing, erosion, and contour based approaches. He also contributed to the data analysis stemming from the pre-processing changes.
 
-Daniel handled the linear SVM baseline, including hyperparameter tuning and the resulting data analysis. He also helped write the code for the feed-forward neural networkcontributed to the methodology of the pre-processing methods and contributed to writing the report.
+Daniel handled the linear SVM baseline, including hyperparameter tuning and the resulting data analysis. He also helped write the code for the feed-forward neural network, contributed to the methodology of the pre-processing methods, and helped write the report.
 
-Ziwen worked on the implementation of the Neural Network and took the initiative on the Convolutional Neural Network, handling the methodology, implementation, and data analysis.
+Zi Wen worked on the implementation of the Neural Network and took the initiative on the Convolutional Neural Network, handling the methodology, implementation, and data analysis.
 
 We hereby state that all the work presented in this report is that of the authors. 
 
