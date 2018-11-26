@@ -65,11 +65,13 @@ Since Naive Bayes is a probabilistic approach, it may have had an advantage in h
 
 The neural network is considered a universal function approximator, which means that with enough nodes, a two-layer neural network can approximate any function to within a certain error bound. The function we are trying to emulate is one which, after training on the data, can output class labels for images depending on whether or not a given drawing appears in the image.
 
-We firstly defined the feed forward neural network by creating multi-layered networks using the sigmoid function as our activation function. The network contains one input layer, one output layer, and a variable number of hidden layers. 
+The neural network model was implemented as a series of matrices, containing the weights of each layer in the network. At each layer, the previous layer's input is multiplied by the matrix and compressed using the sigmoid function, to keep the output of any given layer within a reasonable size. There is no limit on the number of neurons in any given layer, nor on the number of layers, but keeping the layers small and few improves training speeds, and adding more layers usually provides diminishing returns.
 
-The structure of the network starts with the input layer, which contains values based directly on the input data. The input of the hidden layer nearest to the input layer will be the values of the input layer multiplied by weights established between the two layers. The weighted sum of the input layer will go through the activation function and become the output of the first hidden layer. By continuing this “forward-feeding” process, we can continue chaining layers together in this fashion until ultimately predicting a final output in output layer. This output will determine the label our network assigns to a data sample.
+Because each layer's input is passed through to the next layer, until ultimately providing a resultant vector, we call this a ``feed forward'' approach. The largest index in our final output vector determines the label that we assign.
 
-The training process of this is done through back-propagation: we calculate the partial derivative $\frac{\partial C}{\partial w}$ of the cost function $C$ with respect to any weight $w$ (which might be a bias, $b$) in the network and use that to update the weight for future iterations of training, until a satisfactory accuracy is reached or until our model stops improving. 
+Like most gradually trained machine learning models, we train our neural network by minimizing a cost function, in this case minimizing $\frac{\partial C}{\partial w}$, the derivative of the cost function with respect to the weights of our model. By modifying the weights against the gradient of this derivative at each iteration, we gradually get closer to a minimal error, until our model stops improving. 
+
+This gradient descent requires us not only to consider the influence of the last layer on our cost function, but also the layers before. We call this process of applying the changes to weights throughout the network ``back-propagation''.
 
 \subsection{Convolutional Neural Network}
 
@@ -92,7 +94,11 @@ In implementing the SVM, we used Grid Search for cross-validation and hyperparam
 
 \subsection{Neural Network}
 
-%% TODO!!
+The neural networks are the most flexibile in terms of our training methods. Our feed-forward neural network was trained using K-fold cross validation, with $k = 5$.
+
+To reach the best results, we experimented with adding more layers to the network, increasing the number of neurons in the given layers, tweaking the batch sizes, and altering the total number of epochs that we ran.
+
+We also used the same image pre-processing described above.
 
 \subsection{Convolutional Neural Network}
 
@@ -107,40 +113,40 @@ For our SVM, we achieved predictably poor performance, with an accuracy of 4.366
 Erosion and smoothing based image pre-processing didn't show any improvement to the overall results, but cropping the images with the contour-based approach gave accuracies of 5.66\%, which was a relatively significant jump compared to our previous score.
 
 \subsection{Neural Network}
-%% TODO!!!
-(Include results of neural network)
+
+Our neural network ultimately performed relatively poorly, at no point performing better than 20\% accuracy.
+
+Adding layers and neurons marked a faster growth during the first few epochs, but ultimately over time it didn't provide any better performance, so we ultimately kept our layers small and sparse.
+
+Batch sizes and epochs didn't improve the results much either, since the improvement to the model had already begun to taper off with a shorter number of epochs.
+
+Image pre-processing helped the speed of training the model by a significant degree, and it didn't hurt the accuracy, so we settled on using image pre-processing for our feed-forward neural network.
 
 \subsection{Convolutional Neural Network}
 
 Ultimately, our Convolutional Neural Network gave us the best performance recorded, with an accuracy of 69.966\%. However, when we applied smoothing and cropping algorithms to our input data, we found that our performance stayed the same, and in some cases decreased. So as a whole, we achieved our best results with unprocessed input data.
 
 \subsection{Comparison}
-%% TODO!!!
-(Include any extra information, including a comparison between the three models)
+
+As a whole, for Linear SVMs, we saw performance only slightly better than a random baseline, which suggests that our data was not linearly separable enough to find significant distinctions in the input data.
+
+Neural Networks performed better, but not by much, and the Convolutional Neural Network provided far and away the best results.
 
 \section{\textbf{Discussion}}
 
-%%
-%% FILLER TEXT
-%% Remove and fill in the section's content
-%%
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet tincidunt est. Aliquam tellus augue, imperdiet non magna rhoncus, tincidunt placerat mi. Aliquam eleifend nulla finibus tortor tincidunt, non maximus lectus dictum. Donec nec ultrices orci, ut elementum felis. Suspendisse id aliquam orci. Aenean auctor, velit eu venenatis feugiat, arcu diam molestie felis, nec faucibus mauris orci vel ante. Phasellus scelerisque laoreet risus quis sagittis.
+We didn't have high expectations for our linear SVM, so our results weren't too surprising in that regard. However, we were a bit underwhelmed with the performance of the feed-forward neural network. The biggest con for our methodology with the feed-forward neural network is that our model was a fully-connected network, which likely allowed the noise to interfere with the model's training.
 
-Cras feugiat, mauris sed maximus porta, enim elit molestie nulla, a imperdiet dui urna vel nisl. Etiam eu nulla augue. Nullam dui eros, fermentum ut viverra quis, venenatis nec lacus. Nullam congue eget ex eu vehicula. In sed lectus ac turpis lacinia suscipit non non ante. Phasellus lacus erat, sollicitudin et purus eget, venenatis euismod ante. Nulla vitae dui massa. Maecenas augue tortor, pharetra vitae blandit a, ultrices quis nibh. Sed facilisis enim libero, vitae pharetra nulla ornare at. Nam tristique enim vel ante interdum dictum. Quisque volutpat volutpat leo, in accumsan dui malesuada vel. Maecenas pellentesque augue in convallis tristique. Mauris elementum vel metus quis mattis. Nunc tristique scelerisque ullamcorper.
+Through local receptive fields, the neurons in the CNN were able to focus specifically on various regions of the image, allowing it to distinguish the signal from the noise. There may have been a slight bias in our approach, since we put the most resources for training into the CNN, since we had anticipated it having the best results, but it doesn't seem as though the feed-forward neural network would have provided better results with more resources.
 
-Quisque placerat est in enim maximus varius. Nunc nec lectus eu neque euismod viverra. Nullam non elementum purus, id pharetra sem. Vivamus vel vehicula tellus, eu pulvinar orci. Nunc scelerisque eget est sit amet luctus. Etiam et rhoncus odio, eu blandit eros. Phasellus gravida leo magna, quis ultricies risus viverra sit amet. Nunc finibus iaculis vehicula. Aenean nunc enim, sollicitudin at egestas ut, venenatis id ex. Proin at laoreet diam, ut viverra metus. Praesent a erat neque. Etiam volutpat lacinia dui interdum finibus. Praesent justo sem, scelerisque sit amet magna eu, maximus fermentum nibh.
-
-Vivamus tempor pulvinar velit vitae venenatis. Etiam lectus massa, lacinia eu odio nec, iaculis congue tellus. Nam elit massa, malesuada quis diam ut, mollis rhoncus ex. Aliquam pellentesque lobortis lorem, interdum finibus elit ullamcorper vel. Nunc non hendrerit nibh, ut sagittis turpis. Donec dignissim lacus eu mi pretium tristique. Sed pharetra eu urna sed porttitor. Proin mollis turpis et nibh interdum ullamcorper. Nullam imperdiet fringilla lacus. Duis id nulla vitae lorem viverra hendrerit. Pellentesque id lorem eros. Duis semper blandit facilisis. Curabitur sed tempus enim.
-
-Sed id pretium neque, sed pretium mi. Vestibulum eget tincidunt felis, id mollis dolor. Duis eu sollicitudin ligula, sed lobortis massa. Donec egestas convallis maximus. Mauris auctor egestas tellus nec vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In aliquet blandit elit a tempus. Donec urna augue, cursus quis leo a, porta blandit ligula. Quisque aliquet pellentesque nisl nec viverra. Maecenas dictum et lectus sed hendrerit. Nunc dapibus, nisl eu mattis hendrerit, eros lorem consectetur quam, ac accumsan erat risus vel metus. Quisque ipsum dui, bibendum sit amet suscipit non, pellentesque ac odio. Phasellus posuere, dui ut efficitur mattis, arcu arcu elementum ante, vel tristique mi mi sed nisl. Ut ut erat augue. Aliquam volutpat mollis vestibulum. 
+If we were to invest more in the feed-forward neural network, it would probably be the most helpful to invest more into image pre-processing, since we still ended up with quite a bit of noise in our final product.
 
 \section{\textbf{Statement of Contributions}}
 
 Charles made the most significant contributions to the methodology and implementation our pre-processing methods, handling the smoothing, erosion, and contour based approaches. He also contributed to the data analysis stemming from the pre-processing changes.
 
-Daniel handled the linear SVM baseline, including hyperparameter tuning and the resulting data analysis. He also contributed to the methodology of the pre-processing methods and contributed to writing the report.
+Daniel handled the linear SVM baseline, including hyperparameter tuning and the resulting data analysis. He also helped write the code for the feed-forward neural networkcontributed to the methodology of the pre-processing methods and contributed to writing the report.
 
-Ziwen took the initiative on the Neural Network and Convolutional Neural Network, handling the methodology, implementation, and data analysis.
+Ziwen worked on the implementation of the Neural Network and took the initiative on the Convolutional Neural Network, handling the methodology, implementation, and data analysis.
 
 We hereby state that all the work presented in this report is that of the authors. 
 
